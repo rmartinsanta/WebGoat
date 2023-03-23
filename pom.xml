@@ -13,6 +13,8 @@
   <version>2023.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+    
+
   <name>WebGoat</name>
   <description>WebGoat, a deliberately insecure Web Application</description>
   <url>https://github.com/WebGoat/WebGoat</url>
