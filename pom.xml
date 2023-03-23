@@ -147,6 +147,11 @@
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
   </properties>
+    
+  <properties>
+  <sonar.organization>bbon1</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
