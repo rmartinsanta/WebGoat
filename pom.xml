@@ -110,6 +110,8 @@
   <properties>
     <!-- Added by Carel3DS -->
     <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <sonar.organization>carel3ds</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <skipTests>true</skipTests>
     <!-- Shared properties with plugins and version numbers across submodules-->
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
