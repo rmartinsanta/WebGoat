@@ -79,11 +79,6 @@
       <organization>OWASP</organization>
       <organizationUrl>https://github.com/dougmorato</organizationUrl>
       <timezone>America/New_York</timezone>
-      <properties>
-        <picUrl>https://avatars2.githubusercontent.com/u/9654?v=3&amp;s=150</picUrl>
-        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-        <skipTests>true</skipTests>
-      </properties>
     </developer>
   </developers>
 
@@ -148,6 +143,11 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
+    <picUrl>https://avatars2.githubusercontent.com/u/9654?v=3&amp;s=150</picUrl>
+    <sonar.organization>caveeroo</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
   </properties>
 
   <dependencyManagement>
