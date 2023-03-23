@@ -81,7 +81,8 @@
       <timezone>America/New_York</timezone>
       <properties>
         <picUrl>https://avatars2.githubusercontent.com/u/9654?v=3&amp;s=150</picUrl>
-        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+        <sonar.organization>caveeroo</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <skipTests>true</skipTests>
       </properties>
     </developer>
