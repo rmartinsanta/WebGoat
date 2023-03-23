@@ -806,3 +806,5 @@
     </profile>
   </profiles>
 </project>
+
+<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey> <skipTests>true</skipTests>
