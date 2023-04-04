@@ -1,25 +1,3 @@
-/*
- * This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/
- *
- * Copyright (c) 2002 - 2019 Bruce Mayhew
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with this program; if
- * not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
- *
- * Getting Source ==============
- *
- * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects.
- */
-
 package org.owasp.webgoat.lessons.challenges.challenge5;
 
 import java.sql.PreparedStatement;
@@ -56,34 +34,23 @@ public class Assignment5 extends AssignmentEndpoint {
     if (!"Larry".equals(username_login)) {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
-    Connection connection=null;
-    ResultSet resultSet=null;
-    PreparedStatement statement= null;
-    try (connection = dataSource.getConnection()) {
-      statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?");
+    try (var connection = dataSource.getConnection()) {
+      PreparedStatement statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?");
       statement.setString(1, username_login);
       statement.setString(2, password_login);
-      resultSet = statement.executeQuery();
-      if (resultSet.next()) {
-        return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
-      } else {
-        return failed(this).feedback("challenge.close").build();
+      try(ResultSet resultSet = statement.executeQuery()){
+
+      
+
+        if (resultSet.next()) {
+          return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
+        } else {
+          return failed(this).feedback("challenge.close").build();
+        }
       }
     } catch(SQLException e){
-        return failed(this).feedback("SQL.error").build();
-    }finally{
-        if(statement!=null){
-            statement.close();
-        }
-        if(connection!=null){
-            connection.close();
-        }
-        if(resultSet!=null){
-            resultSet.close();
-        }
-        
-        
-        
+      return failed(this).feedback("SQL.error").build();
+
     }
   }
 }
