@@ -56,11 +56,14 @@ public class Assignment5 extends AssignmentEndpoint {
     if (!"Larry".equals(username_login)) {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
-    try (var connection = dataSource.getConnection()) {
-      PreparedStatement statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?");
+    Connection connection=null;
+    ResultSet=null;
+    PreparedStatement statement= null;
+    try (connection = dataSource.getConnection()) {
+      statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?");
       statement.setString(1, username_login);
       statement.setString(2, password_login);
-      ResultSet resultSet = statement.executeQuery();
+      resultSet = statement.executeQuery();
       if (resultSet.next()) {
         return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
       } else {
@@ -69,9 +72,18 @@ public class Assignment5 extends AssignmentEndpoint {
     } catch(SQLException e){
         return failed(this).feedback("SQL.error").build();
     }finally{
-        statement.close();
-        connection.close();
-        resultSet.close();
+        if(statement!=null){
+            statement.close();
+        }
+        if(connection!=null){
+            connection.close();
+        }
+        if(resultSet!=null){
+            resultSet.close();
+        }
+        
+        
+        
     }
   }
 }
