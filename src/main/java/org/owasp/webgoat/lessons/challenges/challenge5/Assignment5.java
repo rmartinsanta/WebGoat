@@ -35,8 +35,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import java.sql.SQLException;
-
 
 @RestController
 @Slf4j
@@ -57,19 +55,20 @@ public class Assignment5 extends AssignmentEndpoint {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
     try (var connection = dataSource.getConnection()) {
-      PreparedStatement statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?");
-      statement.setString(1, username_login);
-      statement.setString(2, password_login);
-      try(ResultSet resultSet = statement.executeQuery()){
-        if (resultSet.next()) {
-          return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
-        } else {
-          return failed(this).feedback("challenge.close").build();
-        }
-      }
-    } catch(SQLException e){
-      return failed(this).feedback("SQL.error").build();
+      PreparedStatement statement =
+          connection.prepareStatement(
+              "select password from challenge_users where userid = '"
+                  + username_login
+                  + "' and password = '"
+                  + password_login
+                  + "'");
+      ResultSet resultSet = statement.executeQuery();
 
+      if (resultSet.next()) {
+        return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
+      } else {
+        return failed(this).feedback("challenge.close").build();
+      }
     }
   }
 }
