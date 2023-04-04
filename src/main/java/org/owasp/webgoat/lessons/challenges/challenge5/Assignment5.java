@@ -24,6 +24,13 @@ public class Assignment5 extends AssignmentEndpoint {
   private final LessonDataSource dataSource;
   private final Flags flags;
 
+  private boolean checkRSet(ResultSet resultSet) throws SQLException{
+    try(resultSet){
+      return resultSet.next()
+    }
+    
+  }
+
   @PostMapping("/challenge/5")
   @ResponseBody
   public AttackResult login(
@@ -34,23 +41,25 @@ public class Assignment5 extends AssignmentEndpoint {
     if (!"Larry".equals(username_login)) {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
-    try (
-      var connection = dataSource.getConnection();
-      PreparedStatement statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?");
+    try (var connection = dataSource.getConnection();PreparedStatement statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?")) {
       statement.setString(1, username_login);
       statement.setString(2, password_login);
-      ResultSet resultSet = statement.executeQuery()) {
+      try(ResultSet resultSet = statement.executeQuery()){
+
+      
 
         if (resultSet.next()) {
           return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
         } else {
           return failed(this).feedback("challenge.close").build();
         }
-    
+      }catch(SQLException e){
+          return failed(this).feedback("SQL.error").build();
 
-      
+      }
     } catch(SQLException e){
       return failed(this).feedback("SQL.error").build();
 
     }
   }
+}
