@@ -67,7 +67,7 @@ public class Assignment5 extends AssignmentEndpoint {
         return failed(this).feedback("challenge.close").build();
       }
     } catch(SQLException e){
-      
+        return failed(this).feedback("SQL.error").build();
     }
   }
 }
