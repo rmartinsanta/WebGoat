@@ -26,7 +26,7 @@ public class Assignment5 extends AssignmentEndpoint {
 
   private boolean checkRSet(ResultSet resultSet) throws SQLException{
     try(resultSet){
-      return resultSet.next()
+      return resultSet.next();
     }
     
   }
@@ -44,22 +44,14 @@ public class Assignment5 extends AssignmentEndpoint {
     try (var connection = dataSource.getConnection();PreparedStatement statement= connection.prepareStatement("SELECT PASSWORD FROM CHALLENGE_USERS WHERE USERID= ? AND PASSWORD = ?")) {
       statement.setString(1, username_login);
       statement.setString(2, password_login);
-      try(ResultSet resultSet = statement.executeQuery()){
-
-      
-
-        if (resultSet.next()) {
+      if (checkRSet(statement.executeQuery())) {
           return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
         } else {
           return failed(this).feedback("challenge.close").build();
         }
-      }catch(SQLException e){
-          return failed(this).feedback("SQL.error").build();
-
       }
     } catch(SQLException e){
       return failed(this).feedback("SQL.error").build();
 
     }
   }
-}
