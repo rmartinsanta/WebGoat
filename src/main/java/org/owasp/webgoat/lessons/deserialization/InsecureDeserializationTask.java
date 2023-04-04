@@ -53,11 +53,13 @@ public class InsecureDeserializationTask extends AssignmentEndpoint {
     int delay;
 
     b64token = token.replace('-', '+').replace('_', '/');
+    //ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(b64token)));
+    //ObjectInputStream  objectIS  = new SecureObjectInputStream(ois);
 
-    try (ObjectInputStream ois =
-        new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(b64token)))) {
+    try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(b64token)))) {
       before = System.currentTimeMillis();
-      Object o = ois.readObject();
+      ObjectInputStream  objectIS  = new SecureObjectInputStream(ois);
+      Object o = objectIS.readObject();
       if (!(o instanceof VulnerableTaskHolder)) {
         if (o instanceof String) {
           return failed(this).feedback("insecure-deserialization.stringobject").build();
