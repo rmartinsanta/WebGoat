@@ -21,6 +21,7 @@ public class SecureObjectInputStream extends ObjectInputStream {
             throw new InvalidClassException("Unauthorized deserialization", osc.getName());
         }
 
+
         return super.resolveClass(osc);
     }
 }

@@ -60,12 +60,12 @@ public class InsecureDeserializationTask extends AssignmentEndpoint {
       before = System.currentTimeMillis();
       ObjectInputStream  objectIS  = new SecureObjectInputStream(ois);
       Object o = objectIS.readObject();
-      if (!(o instanceof VulnerableTaskHolder)) {
+      /*if (!(o instanceof VulnerableTaskHolder)) {
         if (o instanceof String) {
           return failed(this).feedback("insecure-deserialization.stringobject").build();
         }
         return failed(this).feedback("insecure-deserialization.wrongobject").build();
-      }
+      }*/
       after = System.currentTimeMillis();
     } catch (InvalidClassException e) {
       return failed(this).feedback("insecure-deserialization.invalidversion").build();
