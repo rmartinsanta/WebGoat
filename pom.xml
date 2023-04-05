@@ -12,6 +12,8 @@
   <artifactId>webgoat</artifactId>
   <version>2023.5-SNAPSHOT</version>
   <packaging>jar</packaging>
+  <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+  <skipTests>true</skipTests>
 
   <name>WebGoat</name>
   <description>WebGoat, a deliberately insecure Web Application</description>
@@ -81,6 +83,8 @@
       <timezone>America/New_York</timezone>
       <properties>
         <picUrl>https://avatars2.githubusercontent.com/u/9654?v=3&amp;s=150</picUrl>
+        <sonar.organization>2k9pablo</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
       </properties>
     </developer>
   </developers>
