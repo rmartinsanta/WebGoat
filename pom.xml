@@ -151,6 +151,7 @@
     <sonar.projectKey>jaimemedlop_WebGoat</sonar.projectKey>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.language>java</sonar.language>
+    <sonar.projectDate>2023-04-01</sonar.projectDate>
   </properties>
 
   <dependencyManagement>
