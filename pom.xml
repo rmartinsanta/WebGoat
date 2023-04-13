@@ -148,6 +148,9 @@
     <zxcvbn.version>1.5.2</zxcvbn.version>
     <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
     <skipTests>true</skipTests>
+    <sonar.projectKey>jaimemedlop_WebGoat</sonar.projectKey>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.language>java</sonar.language>
   </properties>
 
   <dependencyManagement>
