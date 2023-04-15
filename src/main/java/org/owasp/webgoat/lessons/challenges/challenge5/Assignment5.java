@@ -60,12 +60,13 @@ public class Assignment5 extends AssignmentEndpoint {
 		statement.setString(1, username_login);
         statement.setString(2, password_login);
         ResultSet resultSet = statement.executeQuery(query);
+		if (resultSet.next()) {
+          return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
+        } else {
+          return failed(this).feedback("challenge.close").build();
+        }
 	  }
-      if (resultSet.next()) {
-        return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
-      } else {
-        return failed(this).feedback("challenge.close").build();
-      }
+      
     }
   }
 }
