@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -146,6 +148,12 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
+    <!-- SONAR CLOUD -->
+    <sonar.organization>therealmcmob</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- MDS  -->
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
   </properties>
 
   <dependencyManagement>
@@ -372,7 +380,6 @@
       <groupId>org.glassfish.jaxb</groupId>
       <artifactId>jaxb-runtime</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -423,7 +430,8 @@
           <excludeDevtools>true</excludeDevtools>
           <executable>true</executable>
           <mainClass>org.owasp.webgoat.server.StartWebGoat</mainClass>
-          <!-- See http://docs.spring.io/spring-boot/docs/current/reference/html/howto-build.html#howto-extract-specific-libraries-when-an-executable-jar-runs -->
+          <!-- See
+          http://docs.spring.io/spring-boot/docs/current/reference/html/howto-build.html#howto-extract-specific-libraries-when-an-executable-jar-runs -->
           <requiresUnpack>
             <dependency>
               <groupId>org.asciidoctor</groupId>
@@ -487,10 +495,13 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
-          <argLine>--add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED
-          --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED
-          --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED
-          --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED</argLine>
+          <argLine>--add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens
+            java.base/java.io=ALL-UNNAMED
+            --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED
+            --add-opens java.base/java.util=ALL-UNNAMED --add-opens
+            java.base/java.lang.reflect=ALL-UNNAMED
+            --add-opens java.base/java.text=ALL-UNNAMED --add-opens
+            java.desktop/java.awt.font=ALL-UNNAMED</argLine>
           <excludes>
             <exclude>**/*IntegrationTest.java</exclude>
             <exclude>src/it/java</exclude>
@@ -652,8 +663,10 @@
               <skipProvidedScope>false</skipProvidedScope>
               <skipRuntimeScope>false</skipRuntimeScope>
               <suppressionFiles>
-                <!--suppress UnresolvedMavenProperty -->
-                <suppressionFile>${maven.multiModuleProjectDirectory}/config/dependency-check/project-suppression.xml</suppressionFile>
+                <!--suppress
+                UnresolvedMavenProperty -->
+                <suppressionFile>
+                  ${maven.multiModuleProjectDirectory}/config/dependency-check/project-suppression.xml</suppressionFile>
               </suppressionFiles>
             </configuration>
             <executions>
@@ -680,11 +693,15 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>${maven-surefire-plugin.version}</version>
             <configuration>
-              <argLine>--add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED
-          --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED
-          --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED
-          --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED
-          ${surefire.jacoco.args}</argLine>
+              <argLine>--add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens
+                java.base/java.io=ALL-UNNAMED
+                --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens
+                java.base/java.io=ALL-UNNAMED
+                --add-opens java.base/java.util=ALL-UNNAMED --add-opens
+                java.base/java.lang.reflect=ALL-UNNAMED
+                --add-opens java.base/java.text=ALL-UNNAMED --add-opens
+                java.desktop/java.awt.font=ALL-UNNAMED
+                ${surefire.jacoco.args}</argLine>
               <excludes>
                 <exclude>**/*IntegrationTest.java</exclude>
                 <exclude>src/it/java</exclude>
@@ -736,7 +753,8 @@
                 <phase>test</phase>
                 <configuration>
                   <dataFile>${project.build.directory}/jacoco/jacoco-ut.exec</dataFile>
-                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-unit-test-coverage-report</outputDirectory>
+                  <outputDirectory>
+                    ${project.reporting.outputDirectory}/jacoco-unit-test-coverage-report</outputDirectory>
                 </configuration>
               </execution>
             </executions>

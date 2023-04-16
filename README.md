@@ -1,4 +1,5 @@
 # WebGoat 8: A deliberately insecure Web Application
+sonarcloud computa hijo de puta
 
 [![Build](https://github.com/WebGoat/WebGoat/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/WebGoat/WebGoat/actions/workflows/build.yml)
 [![java-jdk](https://img.shields.io/badge/java%20jdk-17-green.svg)](https://jdk.java.net/)
@@ -143,3 +144,4 @@ Or in a docker run it would (once this version is pushed into docker hub) look l
 docker run -d -p 127.0.0.1:8080:8080 -p 127.0.0.1:9090:9090 -e EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE" -e EXCLUDE_LESSONS="SqlInjectionAdvanced,SqlInjectionMitigations" webgoat/webgoat
 ```
 
+Cambio para reanalisis.
