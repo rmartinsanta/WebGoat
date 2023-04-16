@@ -59,7 +59,7 @@ public class MailboxController {
 
   @PostMapping("/mail")
   @ResponseStatus(HttpStatus.CREATED)
-  public void sendEmail(@RequestBody Email email) {
+  public void sendEmail(@RequestBody EmailTemp email) {
     mailboxRepository.save(email);
   }
 
