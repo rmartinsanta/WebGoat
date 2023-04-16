@@ -43,7 +43,6 @@ public class Assignment5 extends AssignmentEndpoint {
 
   private final LessonDataSource dataSource;
   private final Flags flags;
-  Connection connection;
 
   @PostMapping("/challenge/5")
   @ResponseBody
@@ -56,7 +55,7 @@ public class Assignment5 extends AssignmentEndpoint {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
     String queryString = "select password from challenge_users where userid = ? and password = ?";
-    try (PreparedStatement statement = connection.prepareStatement(queryString)) {
+    try (Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(queryString)) {
       statement.setString(1, username_login);
       statement.setString(2, password_login);
       ResultSet resultSet = statement.executeQuery(queryString);
