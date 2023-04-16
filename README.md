@@ -40,7 +40,7 @@ Already have a browser and ZAP and/or Burp installed on your machine in this cas
 
 Every release is also published on [DockerHub](https://hub.docker.com/r/webgoat/webgoat).
 
-```shell
+```shell 
 docker run -it -p 127.0.0.1:8080:8080 -p 127.0.0.1:9090:9090 webgoat/webgoat
 ```
 
