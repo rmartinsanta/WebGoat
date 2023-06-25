@@ -108,6 +108,11 @@
   </issueManagement>
 
   <properties>
+      <sonar.organization>pica2108</sonar.organization>
+      <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+      <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+      <skipTests>true</skipTests>
+
     <!-- Shared properties with plugins and version numbers across submodules-->
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
     <bootstrap.version>3.3.7</bootstrap.version>
@@ -163,6 +168,7 @@
         <version>1.3</version>
       </dependency>
       <dependency>
+
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctorj</artifactId>
         <version>${asciidoctorj.version}</version>
