@@ -82,6 +82,8 @@
       <properties>
         <sonar.organization>a-sierrap</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+          <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+          <skipTests>true</skipTests>
         <picUrl>https://avatars2.githubusercontent.com/u/9654?v=3&amp;s=150</picUrl>
       </properties>
     </developer>
