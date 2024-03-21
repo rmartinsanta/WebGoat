@@ -146,6 +146,12 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
+
+    <sonar.organization>dariojimg</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <skipTests>true</skipTests>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    
   </properties>
 
   <dependencyManagement>
