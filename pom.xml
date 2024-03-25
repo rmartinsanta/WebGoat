@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -12,7 +10,6 @@
   <artifactId>webgoat</artifactId>
   <version>2023.5-SNAPSHOT</version>
   <packaging>jar</packaging>
-
   <name>WebGoat</name>
   <description>WebGoat, a deliberately insecure Web Application</description>
   <url>https://github.com/WebGoat/WebGoat</url>
@@ -84,7 +81,6 @@
       </properties>
     </developer>
   </developers>
-
   <mailingLists>
     <mailingList>
       <name>OWASP WebGoat Mailing List</name>
@@ -94,19 +90,16 @@
       <archive>http://lists.owasp.org/pipermail/owasp-webgoat/</archive>
     </mailingList>
   </mailingLists>
-
   <scm>
     <connection>scm:git:git@github.com:WebGoat/WebGoat.git</connection>
     <developerConnection>scm:git:git@github.com:WebGoat/WebGoat.git</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/WebGoat/WebGoat</url>
   </scm>
-
   <issueManagement>
     <system>Github Issues</system>
     <url>https://github.com/WebGoat/WebGoat/issues</url>
   </issueManagement>
-
   <properties>
     <!-- Shared properties with plugins and version numbers across submodules-->
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
@@ -146,17 +139,16 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
   </properties>
-
   <dependencyManagement>
     <dependencies>
-
       <dependency>
         <groupId>org.ow2.asm</groupId>
         <artifactId>asm</artifactId>
         <version>9.1</version>
       </dependency>
-
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-exec</artifactId>
@@ -250,7 +242,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -372,7 +363,6 @@
       <groupId>org.glassfish.jaxb</groupId>
       <artifactId>jaxb-runtime</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -394,7 +384,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <repositories>
     <repository>
       <snapshots>
@@ -413,7 +402,6 @@
       <url>https://repo.maven.apache.org/maven2</url>
     </pluginRepository>
   </pluginRepositories>
-
   <build>
     <plugins>
       <plugin>
@@ -511,7 +499,7 @@
           <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
         </configuration>
       </plugin>
-   
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
@@ -546,7 +534,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>local-server</id>
