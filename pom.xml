@@ -146,7 +146,7 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
-     <!-- new confs for sonar :)-->
+     <!-- new confs for sonar :) -->
     <sonar.organization>v3ruxz</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
