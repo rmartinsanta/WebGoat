@@ -129,6 +129,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
     if (token == null || json == null) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+    
 
     String user;
     String refreshToken;
