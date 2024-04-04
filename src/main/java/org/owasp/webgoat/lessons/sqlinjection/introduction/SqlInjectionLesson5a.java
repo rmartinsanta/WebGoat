@@ -64,8 +64,8 @@ public class SqlInjectionLesson5a extends AssignmentEndpoint {
       try (PreparedStatement statement =
           connection.preparedStatement(
               ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
-        statement.setString(1, accountName);
-        ResultSet results = statement.executeQuery(query);
+            statement.setString(1, accountName);
+            ResultSet results = statement.executeQuery(query);
 
         if ((results != null) && (results.first())) {
           ResultSetMetaData resultsMetaData = results.getMetaData();
