@@ -104,7 +104,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
     try {
-      Jwt jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parse(token.replace("Bearer ", ""));
+      Jwt jwt = (Jwt) Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJwt(token).getBody();
       Claims claims = (Claims) jwt.getBody();
       String user = (String) claims.get("user");
       if ("Tom".equals(user)) {
@@ -134,7 +134,7 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
     String refreshToken;
     try {
       Jwt<Header, Claims> jwt =
-              (Jwt<Header, Claims>) Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJwt(token).getBody();
+          Jwts.parser().setSigningKey(JWT_PASSWORD).parsetoken.replace("Bearer ", ""));
       user = (String) jwt.getBody().get("user");
       refreshToken = (String) json.get("refresh_token");
     } catch (ExpiredJwtException e) {
