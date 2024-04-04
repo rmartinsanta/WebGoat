@@ -79,7 +79,6 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
     }
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
   }
-
   private Map<String, Object> createNewTokens(String user) {
     Map<String, Object> claims = Map.of("admin", "false", "user", user);
     String token =
@@ -132,7 +131,9 @@ public class JWTRefreshEndpoint extends AssignmentEndpoint {
 
     String user;
     String refreshToken;
-    try {Jwt<Header, Claims> jwt = Jwts.parser().setSigningKey(JWT_PASSWORD).parseClaimsJwt(token);
+    try {
+      Jwt<Header, Claims> jwt =
+              Jwts.parser().setSigningKey(JWT_PASSWORD).parse(token.replace("Bearer ", ""));
       user = (String) jwt.getBody().get("user");
       refreshToken = (String) json.get("refresh_token");
     } catch (ExpiredJwtException e) {
