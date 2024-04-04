@@ -65,7 +65,7 @@ public class SqlInjectionChallenge extends AssignmentEndpoint {
             try (Connection connection = dataSource.getConnection()) {
                 String checkUserQuery =
                         "select userid from sql_challenge_users where userid = ?";
-                PreparedStatement statement = connection.preparedStatement(checkUserQuery))
+                PreparedStatement statement = connection.preparedStatement(checkUserQuery));
                 statement.setString(1, username_reg);
                 ResultSet resultSet = statement.executeQuery(checkUserQuery);
                 if (resultSet.next()) {
