@@ -11,7 +11,7 @@
 # Introduction
 sffdr
 WebGoat is a deliberately insecure web application maintained by [OWASP](http://www.owasp.org/) designed to teach web
-application security lessons.
+application security lessons.  Jorge y Rodrigo 
 
 This program is a demonstration of common server-side application flaws. The
 exercises are intended to be used by people to learn about application security and
