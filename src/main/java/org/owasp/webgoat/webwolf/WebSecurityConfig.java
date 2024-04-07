@@ -61,11 +61,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     security.and().formLogin().loginPage("/login").defaultSuccessUrl("/home", true).permitAll();
     security.and().logout().permitAll();
   }
+     @Autowired
+    private UserDetailsService userDetailsService;
 
-  @Autowired
-  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService); // .passwordEncoder(bCryptPasswordEncoder());
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+            .passwordEncoder(passwordEncoder());
+    }
+
 
   @Bean
   @Override
