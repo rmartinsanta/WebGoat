@@ -105,7 +105,7 @@ git checkout <<branch_name>>
 docker build -f Dockerfile . -t webgoat/webgoat
 ```
 
-Now we are ready to run the project. WebGoat is using Spring Boot.
+Now we are ready to run the projec. WebGoat is using Spring Boot.
 
 ```Shell
 # On Linux/Mac:
