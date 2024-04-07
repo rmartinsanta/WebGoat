@@ -107,7 +107,8 @@
 
 
   <properties>
-
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
     <sonar.organization>0x5a6572c3b847c79dc3bf73</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- Shared properties with plugins and version numbers across submodules-->
