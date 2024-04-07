@@ -55,7 +55,7 @@ public class Assignment5 extends AssignmentEndpoint {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
     String query = "SELECT * FROM users WHERE userid = ? AND password = ?";
-    try (var connection = dataSource.getConnection() {
+    try (var connection = dataSource.getConnection()) {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, username_login);
       statement.setString(2, password_login);
