@@ -58,7 +58,7 @@ public class Assignment5 extends AssignmentEndpoint {
     try (var connection = dataSource.getConnection() {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, username_login);
-      statement.setString(1, password_login);
+      statement.setString(2, password_login);
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next()) {
