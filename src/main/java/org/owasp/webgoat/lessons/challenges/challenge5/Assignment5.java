@@ -45,7 +45,6 @@ public class Assignment5 extends AssignmentEndpoint {
   private final Flags flags;
 
   @PostMapping("/challenge/5")
-
   @ResponseBody
   public AttackResult login(
       @RequestParam String username_login, @RequestParam String password_login) throws Exception {
