@@ -163,6 +163,13 @@
         <artifactId>asm</artifactId>
         <version>9.1</version>
       </dependency>
+      
+      <dependency>
+        <groupId>javax.sql</groupId>
+        <artifactId>javax.sql-api</artifactId>
+        <version>1.0</version>
+      </dependency>
+
 
       <dependency>
         <groupId>org.apache.commons</groupId>

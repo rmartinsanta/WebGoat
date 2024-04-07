@@ -31,6 +31,7 @@
 package org.owasp.webgoat.container;
 
 import lombok.AllArgsConstructor;
+import javax.sql.DataSource;
 import org.owasp.webgoat.container.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -85,10 +86,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {
-  auth.jdbcAuthentication()
-    .dataSource(dataSource)
-    .usersByUsernameQuery("SELECT * FROM users WHERE username = ?")
-    .passwordEncoder(new BCryptPasswordEncoder());
+    auth.jdbcAuthentication()
+        .dataSource(dataSource)
+        .usersByUsernameQuery("SELECT * FROM users WHERE username = ?")
+        .passwordEncoder(new BCryptPasswordEncoder());
   }
 
   @Bean
