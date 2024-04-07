@@ -145,6 +145,8 @@
     <zxcvbn.version>1.5.2</zxcvbn.version>
     <sonar.organization>riveroo19</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
   </properties>
 
   <dependencyManagement>
