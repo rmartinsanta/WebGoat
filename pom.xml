@@ -147,8 +147,6 @@
     <!-- do not update necessary for lesson -->
     <sonar.organization>adrimj09</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
-    <zxcvbn.version>1.5.2</zxcvbn.version>
     <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
     <skipTests>true</skipTests>
  </properties>
