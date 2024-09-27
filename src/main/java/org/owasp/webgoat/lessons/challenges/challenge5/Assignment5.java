@@ -22,8 +22,7 @@
 
 package org.owasp.webgoat.lessons.challenges.challenge5;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.webgoat.container.LessonDataSource;
@@ -54,16 +53,11 @@ public class Assignment5 extends AssignmentEndpoint {
     if (!"Larry".equals(username_login)) {
       return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
     }
-    try (var connection = dataSource.getConnection()) {
-      PreparedStatement statement =
-          connection.prepareStatement(
-              "select password from challenge_users where userid = '"
-                  + username_login
-                  + "' and password = '"
-                  + password_login
-                  + "'");
-      ResultSet resultSet = statement.executeQuery();
-
+    String queryString = "select password from challenge_users where userid = ? and password = ?";
+    try (Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(queryString)) {
+      statement.setString(1, username_login);
+      statement.setString(2, password_login);
+      ResultSet resultSet = statement.executeQuery(queryString);
       if (resultSet.next()) {
         return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
       } else {
