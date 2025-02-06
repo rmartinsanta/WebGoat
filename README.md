@@ -1,5 +1,5 @@
 # IMPORTANT NOTICE
-This is an unlinked fork of the orginal WebGoat project (https://github.com/WebGoat/WebGoat).
+This is an unlinked fork of the original WebGoat project (https://github.com/WebGoat/WebGoat).
 Any contributions should target the original project.
 
 # WebGoat 8: A deliberately insecure Web Application
