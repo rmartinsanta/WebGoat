@@ -105,6 +105,8 @@
   </issueManagement>
 
   <properties>
+    <sonar.organization>f1gueron</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- Shared properties with plugins and version numbers across submodules-->
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
     <bootstrap.version>3.3.7</bootstrap.version>
