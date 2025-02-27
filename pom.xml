@@ -699,7 +699,7 @@
             <version>${jacoco.version}</version>
             <executions>
               <execution>
-                <id>before-unit-test</id>
+                <id> before-unit-test</id>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
