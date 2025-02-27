@@ -153,6 +153,12 @@
     <dependencies>
 
       <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-core</artifactId>
+          <version>5.0.7.RELEASE</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.ow2.asm</groupId>
         <artifactId>asm</artifactId>
         <version>9.1</version>
