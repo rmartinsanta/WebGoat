@@ -41,34 +41,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class Assignment5 extends AssignmentEndpoint {
 
-  private final LessonDataSource dataSource;
-  private final Flags flags;
+    private final LessonDataSource dataSource;
+    private final Flags flags;
 
-  @PostMapping("/challenge/5")
-  @ResponseBody
-  public AttackResult login(
-      @RequestParam String username_login, @RequestParam String password_login) throws Exception {
-    if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
-      return failed(this).feedback("required4").build();
-    }
-    if (!"Larry".equals(username_login)) {
-      return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
-    }
-    try (var connection = dataSource.getConnection()) {
-      PreparedStatement statement =
-          connection.prepareStatement(
-              "select password from challenge_users where userid = '"
-                  + username_login
-                  + "' and password = '"
-                  + password_login
-                  + "'");
-      ResultSet resultSet = statement.executeQuery();
+    @PostMapping("/challenge/5")
+    @ResponseBody
+    public AttackResult login(
+            @RequestParam String username_login, @RequestParam String password_login) throws Exception {
+        if (!StringUtils.hasText(username_login) || !StringUtils.hasText(password_login)) {
+            return failed(this).feedback("required4").build();
+        }
+        if (!"Larry".equals(username_login)) {
+            return failed(this).feedback("user.not.larry").feedbackArgs(username_login).build();
+        }
+        try (var connection = dataSource.getConnection()) {
+            String query = "SELECT password FROM challenge_users WHERE userid = ? AND password = ?";
 
-      if (resultSet.next()) {
-        return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
-      } else {
-        return failed(this).feedback("challenge.close").build();
-      }
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, username_login);
+                statement.setString(2, password_login);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    return success(this).feedback("challenge.solved").feedbackArgs(flags.getFlag(5)).build();
+                } else {
+                    return failed(this).feedback("challenge.close").build();
+                }
+            }
+        }
     }
-  }
 }
