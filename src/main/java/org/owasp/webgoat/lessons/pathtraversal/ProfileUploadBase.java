@@ -52,7 +52,6 @@ public class ProfileUploadBase extends AssignmentEndpoint {
         return failed(this).feedback("path-traversal-profile-invalid-location").build();
       }
 
-      canonicalUploadedFile.createNewFile();
       FileCopyUtils.copy(file.getBytes(), canonicalUploadedFile);
 
       if (attemptWasMade(uploadDirectory, canonicalUploadedFile)) {
