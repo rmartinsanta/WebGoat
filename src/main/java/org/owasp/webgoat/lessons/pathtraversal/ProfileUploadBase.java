@@ -32,23 +32,35 @@ public class ProfileUploadBase extends AssignmentEndpoint {
     if (file.isEmpty()) {
       return failed(this).feedback("path-traversal-profile-empty-file").build();
     }
+
     if (StringUtils.isEmpty(fullName)) {
       return failed(this).feedback("path-traversal-profile-empty-name").build();
+    }
+
+    if (fullName.contains("..") || fullName.contains("/") || fullName.contains("\\")) {
+      return failed(this).feedback("path-traversal-profile-invalid-name").build();
     }
 
     File uploadDirectory = cleanupAndCreateDirectoryForUser();
 
     try {
-      var uploadedFile = new File(uploadDirectory, fullName);
-      uploadedFile.createNewFile();
-      FileCopyUtils.copy(file.getBytes(), uploadedFile);
+      File uploadedFile = new File(uploadDirectory, fullName);
+      File canonicalUploadedFile = uploadedFile.getCanonicalFile();
+      File canonicalUploadDir = uploadDirectory.getCanonicalFile();
 
-      if (attemptWasMade(uploadDirectory, uploadedFile)) {
-        return solvedIt(uploadedFile);
+      if (!canonicalUploadedFile.getPath().startsWith(canonicalUploadDir.getPath())) {
+        return failed(this).feedback("path-traversal-profile-invalid-location").build();
+      }
+
+      canonicalUploadedFile.createNewFile();
+      FileCopyUtils.copy(file.getBytes(), canonicalUploadedFile);
+
+      if (attemptWasMade(uploadDirectory, canonicalUploadedFile)) {
+        return solvedIt(canonicalUploadedFile);
       }
       return informationMessage(this)
           .feedback("path-traversal-profile-updated")
-          .feedbackArgs(uploadedFile.getAbsoluteFile())
+          .feedbackArgs(canonicalUploadedFile.getAbsoluteFile())
           .build();
 
     } catch (IOException e) {
