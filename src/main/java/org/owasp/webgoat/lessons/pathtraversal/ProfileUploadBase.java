@@ -28,20 +28,23 @@ public class ProfileUploadBase extends AssignmentEndpoint {
   private String webGoatHomeDirectory;
   private WebSession webSession;
 
-  protected AttackResult execute(MultipartFile file, String fullName) {
-    if (file.isEmpty()) {
-      return failed(this).feedback("path-traversal-profile-empty-file").build();
-    }
 
-    if (StringUtils.isEmpty(fullName)) {
-      return failed(this).feedback("path-traversal-profile-empty-name").build();
-    }
+    protected AttackResult execute(MultipartFile file, String fullName) {
+      if (file.isEmpty()) {
+          return failed(this).feedback("path-traversal-profile-empty-file").build();
+      }
 
-    if (fullName.contains("..") || fullName.contains("/") || fullName.contains("\\")) {
-      return failed(this).feedback("path-traversal-profile-invalid-name").build();
-    }
+      if (!StringUtils.hasLength(fullName)) {
+          return failed(this).feedback("path-traversal-profile-empty-name").build();
+      }
 
-    File uploadDirectory = cleanupAndCreateDirectoryForUser();
+      if (fullName.isBlank() || fullName.contains("..") || fullName.contains("/") || 
+          fullName.contains("\\") ||
+          fullName.indexOf('\0') != -1) {
+          return failed(this).feedback("path-traversal-profile-invalid-name").build();
+      }
+
+      File uploadDirectory = cleanupAndCreateDirectoryForUser();
 
     try {
       File uploadedFile = new File(uploadDirectory, fullName);
