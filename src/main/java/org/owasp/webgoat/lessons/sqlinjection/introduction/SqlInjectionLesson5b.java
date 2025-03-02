@@ -56,34 +56,33 @@ public class SqlInjectionLesson5b extends AssignmentEndpoint {
       @RequestParam String userid, @RequestParam String login_count, HttpServletRequest request)
       throws IOException {
     return injectableQuery(login_count, userid);
-  }
+    }
 
-  protected AttackResult injectableQuery(String login_count, String accountName) {
-    String queryString = "SELECT * From user_data WHERE Login_Count = ? and userid= " + accountName;
+    protected AttackResult injectableQuery(String login_count, String accountName) {
+    String queryString = "SELECT * FROM user_data WHERE Login_Count = ? AND userid = ?";
     try (Connection connection = dataSource.getConnection()) {
       PreparedStatement query =
-          connection.prepareStatement(
-              queryString, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        connection.prepareStatement(
+          queryString, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
       int count = 0;
       try {
-        count = Integer.parseInt(login_count);
+      count = Integer.parseInt(login_count);
       } catch (Exception e) {
-        return failed(this)
-            .output(
-                "Could not parse: "
-                    + login_count
-                    + " to a number"
-                    + "<br> Your query was: "
-                    + queryString.replace("?", login_count))
-            .build();
+      return failed(this)
+        .output(
+          "Could not parse: "
+            + login_count
+            + " to a number"
+            + "<br> Your query was: "
+            + queryString.replace("?", login_count))
+        .build();
       }
 
       query.setInt(1, count);
-      // String query = "SELECT * FROM user_data WHERE Login_Count = " + login_count + " and userid
-      // = " + accountName, ;
+      query.setString(2, accountName);
       try {
-        ResultSet results = query.executeQuery();
+      ResultSet results = query.executeQuery();
 
         if ((results != null) && (results.first() == true)) {
           ResultSetMetaData resultsMetaData = results.getMetaData();
