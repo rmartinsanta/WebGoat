@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import org.owasp.webgoat.container.LessonDataSource;
 import org.owasp.webgoat.container.assignments.AssignmentEndpoint;
 import org.owasp.webgoat.container.assignments.AssignmentHints;
@@ -68,7 +69,7 @@ public class SqlInjectionLesson10 extends AssignmentEndpoint {
         try (PreparedStatement statement = connection.prepareStatement(query, 
                 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             statement.setString(1, "%" + action + "%");
-            ResultSet results = statement.executeQuery()
+            ResultSet results = statement.executeQuery();
 
         if (results.getStatement() != null) {
           results.first();
