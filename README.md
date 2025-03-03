@@ -133,7 +133,7 @@ server.address=x.x.x.x
 
 For specialist only. There is a way to set up WebGoat with a personalized menu. You can leave out some menu categories or individual lessons by setting certain environment variables.
 
-For instance running as a jar on a Linux/macOS it will look like this:
+For instance running as a jar on a Linux it will look like this:
 
 ```Shell
 export EXCLUDE_CATEGORIES="CLIENT_SIDE,GENERAL,CHALLENGE"
