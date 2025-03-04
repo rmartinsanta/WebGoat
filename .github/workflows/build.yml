@@ -3,7 +3,7 @@ on:
     push:
         branches:
             - main
-            -Vulnerabilidades
+            - Vulnerabilidades
     pull_request:
         types: [opened, synchronize, reopened]
 jobs:
