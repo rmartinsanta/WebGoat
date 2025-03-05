@@ -60,7 +60,6 @@ public class SqlInjectionLesson9 extends AssignmentEndpoint {
   public AttackResult completed(@RequestParam String name, @RequestParam String auth_tan) {
     return injectableQueryIntegrity(name, auth_tan);
   }
-
   protected AttackResult injectableQueryIntegrity(String name, String auth_tan) {
     StringBuilder output = new StringBuilder();
     // Se define la consulta utilizando parametros
