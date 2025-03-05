@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class AccessControlIntegrationTest extends IntegrationTest {
 
   @Test
-  void testLesson() {
+  void testLesson( ) {
     startLesson("MissingFunctionAC", true);
     assignment1();
     assignment2();

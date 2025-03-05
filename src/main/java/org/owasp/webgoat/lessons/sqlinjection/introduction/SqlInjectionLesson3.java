@@ -61,6 +61,7 @@ public class SqlInjectionLesson3 extends AssignmentEndpoint {
         Statement checkStatement =
             connection.createStatement(TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY);
         statement.executeUpdate(query);
+
         ResultSet results =
             checkStatement.executeQuery("SELECT * FROM employees WHERE last_name='Barnett';");
         StringBuilder output = new StringBuilder();
