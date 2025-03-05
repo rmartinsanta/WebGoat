@@ -19,16 +19,16 @@
  *
  * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects.
  */
-
+ 
 package org.owasp.webgoat.lessons.sqlinjection.introduction;
 
 import static org.hsqldb.jdbc.JDBCResultSet.CONCUR_UPDATABLE;
 import static org.hsqldb.jdbc.JDBCResultSet.TYPE_SCROLL_SENSITIVE;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import org.owasp.webgoat.container.LessonDataSource;
 import org.owasp.webgoat.container.assignments.AssignmentEndpoint;
 import org.owasp.webgoat.container.assignments.AssignmentHints;
@@ -63,23 +63,19 @@ public class SqlInjectionLesson9 extends AssignmentEndpoint {
 
   protected AttackResult injectableQueryIntegrity(String name, String auth_tan) {
     StringBuilder output = new StringBuilder();
-    String query =
-        "SELECT * FROM employees WHERE last_name = '"
-            + name
-            + "' AND auth_tan = '"
-            + auth_tan
-            + "'";
+    // Se define la consulta utilizando parametros
+    String query = "SELECT * FROM employees WHERE last_name = ? AND auth_tan = ?";
     try (Connection connection = dataSource.getConnection()) {
-      try {
-        Statement statement = connection.createStatement(TYPE_SCROLL_SENSITIVE, CONCUR_UPDATABLE);
+      try (PreparedStatement preparedStatement = connection.prepareStatement(query, TYPE_SCROLL_SENSITIVE, CONCUR_UPDATABLE)) {
+        // Se asignan los valores de los parametros
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, auth_tan);
+        // Consulta parametrizada 
         SqlInjectionLesson8.log(connection, query);
-        ResultSet results = statement.executeQuery(query);
-        var test = results.getRow() != 0;
-        if (results.getStatement() != null) {
+        try (ResultSet results = preparedStatement.executeQuery()) {
           if (results.first()) {
             output.append(SqlInjectionLesson8.generateTable(results));
           } else {
-            // no results
             return failed(this).feedback("sql-injection.8.no.results").build();
           }
         }
@@ -102,21 +98,20 @@ public class SqlInjectionLesson9 extends AssignmentEndpoint {
 
   private AttackResult checkSalaryRanking(Connection connection, StringBuilder output) {
     try {
+      // La consulta es estatica, por lo que no necesita parametros
       String query = "SELECT * FROM employees ORDER BY salary DESC";
-      try (Statement statement =
-          connection.createStatement(TYPE_SCROLL_SENSITIVE, CONCUR_UPDATABLE); ) {
-        ResultSet results = statement.executeQuery(query);
-
-        results.first();
-        // user completes lesson if John Smith is the first in the list
-        if ((results.getString(2).equals("John")) && (results.getString(3).equals("Smith"))) {
-          output.append(SqlInjectionLesson8.generateTable(results));
-          return success(this)
-              .feedback("sql-injection.9.success")
-              .output(output.toString())
-              .build();
-        } else {
-          return failed(this).feedback("sql-injection.9.one").output(output.toString()).build();
+      try (PreparedStatement statement = connection.prepareStatement(query, TYPE_SCROLL_SENSITIVE, CONCUR_UPDATABLE)) {
+        try (ResultSet results = statement.executeQuery()) {
+          results.first();
+          if ((results.getString(2).equals("John")) && (results.getString(3).equals("Smith"))) {
+            output.append(SqlInjectionLesson8.generateTable(results));
+            return success(this)
+                .feedback("sql-injection.9.success")
+                .output(output.toString())
+                .build();
+          } else {
+            return failed(this).feedback("sql-injection.9.one").output(output.toString()).build();
+          }
         }
       }
     } catch (SQLException e) {
@@ -126,3 +121,4 @@ public class SqlInjectionLesson9 extends AssignmentEndpoint {
     }
   }
 }
+
