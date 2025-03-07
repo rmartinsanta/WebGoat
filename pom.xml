@@ -106,6 +106,8 @@
 
   <properties>
     <!-- Shared properties with plugins and version numbers across submodules-->
+    <sonar.organization>ismatkl1</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>  
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
     <bootstrap.version>3.3.7</bootstrap.version>
     <cglib.version>2.2</cglib.version>
