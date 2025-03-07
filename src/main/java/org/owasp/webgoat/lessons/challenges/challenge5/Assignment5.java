@@ -56,12 +56,9 @@ public class Assignment5 extends AssignmentEndpoint {
     }
     try (var connection = dataSource.getConnection()) {
       PreparedStatement statement =
-          connection.prepareStatement(
-              "select password from challenge_users where userid = '"
-                  + username_login
-                  + "' and password = '"
-                  + password_login
-                  + "'");
+          connection.prepareStatement("SELECT password FROM challenge_users WHERE userid = ? AND password = ?");
+          statement.setString(1, username_login);
+          statement.setString(2, password_login);
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next()) {
