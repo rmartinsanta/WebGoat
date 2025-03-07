@@ -67,7 +67,7 @@ This way, you can start where you left off. If you remove the container, you nee
 Instead of installing tools locally we have a complete Docker image based on running a desktop in your browser. This way you only have to run a Docker image which will give you the best user experience.
 
 ```shell
-docker run -p 127.0.0.1:3000:3000 webgoat/webgoat-desktop
+docker run -p 127.0.0.1:3000:3000 webgoat/webgoat-desktop  qq
 ```
 
 ## 3. Standalone
