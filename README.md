@@ -112,7 +112,7 @@ docker build -f Dockerfile . -t webgoat/webgoat
 Now we are ready to run the project. WebGoat is using Spring Boot.
 
 ```Shell
-# On Linux/Mac:
+# On Linux/Mac: n
 ./mvnw spring-boot:run
 # On Windows:
 ./mvnw.cmd spring-boot:run
