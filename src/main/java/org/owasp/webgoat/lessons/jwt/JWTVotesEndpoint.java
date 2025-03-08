@@ -146,7 +146,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
         new MappingJacksonValue(
             votes.values().stream()
                 .sorted(comparingLong(Vote::getAverage).reversed())
-                .collect(toList()));
+                .toList());
     if (StringUtils.isEmpty(accessToken)) {
       value.setSerializationView(Views.GuestView.class);
     } else {
