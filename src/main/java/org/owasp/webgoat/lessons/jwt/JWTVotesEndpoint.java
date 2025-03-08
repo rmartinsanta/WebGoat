@@ -30,7 +30,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.impl.TextCodec;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
@@ -68,7 +67,7 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class JWTVotesEndpoint extends AssignmentEndpoint {
 
-  public static final String JWT_PASSWORD = TextCodec.BASE64.encode("victory");
+  public static final String JWT_PASSWORD = System.getenv("SECRET");
   private static String validUsers = "TomJerrySylvester";
 
   private static int totalVotes = 38929;
@@ -147,7 +146,7 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
         new MappingJacksonValue(
             votes.values().stream()
                 .sorted(comparingLong(Vote::getAverage).reversed())
-                .collect(toList()));
+                .toList());
     if (StringUtils.isEmpty(accessToken)) {
       value.setSerializationView(Views.GuestView.class);
     } else {
