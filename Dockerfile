@@ -8,6 +8,7 @@ RUN \
   chmod -R g=u /home/webgoat
 
 USER webgoat
+ENV SECRET=V3rY53CuR3P4sSW0rdddd
 
 COPY --chown=webgoat target/webgoat-*.jar /home/webgoat/webgoat.jar
 
