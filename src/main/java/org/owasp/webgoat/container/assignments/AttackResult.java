@@ -87,14 +87,14 @@ public class AttackResult {
     public AttackResult build() {
       return new AttackResult(
           lessonCompleted,
-          messages.getMessage(feedbackResourceBundleKey, feedbackArgs),
-          messages.getMessage(output, output, outputArgs),
-          assignment.getClass().getSimpleName(),
-          attemptWasMade);
+      messages.getMessage(feedbackResourceBundleKey, feedbackArgs),
+      messages.getMessage(output, output, outputArgs),
+      assignment, // Ahora es un String y no un objeto AssignmentEndpoint
+      attemptWasMade);
     }
-
-    public AttackResultBuilder assignment(AssignmentEndpoint assignment) {
-      this.assignment = assignment;
+      
+    public AttackResultBuilder assignment(String assignmentName) {
+      this.assignment = assignmentName; // Guardamos solo el nombre en String
       return this;
     }
   }
