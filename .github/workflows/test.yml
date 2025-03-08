@@ -26,7 +26,7 @@ jobs:
             -   name: Setup Pyton
                 uses: actions/setup-python@v4
                 with:
-                    python-version: '3.7'
+                    python-version: '3.10'
                     architecture: x64
             # Uses an action to add JDK 17 to the VM (and mvn?)
             -   name: set up JDK 17
@@ -37,7 +37,7 @@ jobs:
                     architecture: x64
             #Uses an action to set up a cache using a certain key based on the hash of the dependencies
             -   name: Cache Maven packages
-                uses: actions/cache@v3.2.6
+                uses: actions/cache@v4
                 with:
                     path: ~/.m2
                     key: ubuntu-latest-m2-${{ hashFiles('**/pom.xml') }}
