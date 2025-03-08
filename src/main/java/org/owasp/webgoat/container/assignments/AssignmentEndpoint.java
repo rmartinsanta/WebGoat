@@ -57,12 +57,13 @@ public abstract class AssignmentEndpoint implements Initializeable {
    * @return a builder for creating a result from a lesson
    * @param assignment
    */
-  protected AttackResult.AttackResultBuilder success(AssignmentEndpoint assignment) {
+  protected AttackResult.AttackResultBuilder success() {
     return AttackResult.builder(messages)
-        .lessonCompleted(true)
-        .attemptWasMade()
-        .feedback("assignment.solved")
-        .assignment(assignment);
+            .lessonCompleted(true)
+            .attemptWasMade()
+            .feedback("assignment.solved")
+            .assignmentName(this.getClass().getSimpleName()) // Solo pasa el nombre del assignment
+            .build();
   }
 
   /**
@@ -75,16 +76,17 @@ public abstract class AssignmentEndpoint implements Initializeable {
    * @return a builder for creating a result from a lesson
    * @param assignment
    */
-  protected AttackResult.AttackResultBuilder failed(AssignmentEndpoint assignment) {
+  protected AttackResult.AttackResultBuilder failed() {
     return AttackResult.builder(messages)
         .lessonCompleted(false)
         .attemptWasMade()
         .feedback("assignment.not.solved")
-        .assignment(assignment);
+        .assignmentName(this.getClass().getSimpleName()) // Solo pasa el nombre del assignment
+        .build();
   }
 
-  protected AttackResult.AttackResultBuilder informationMessage(AssignmentEndpoint assignment) {
-    return AttackResult.builder(messages).lessonCompleted(false).assignment(assignment);
+  protected AttackResult.AttackResultBuilder informationMessage() {
+    return AttackResult.builder(messages).lessonCompleted(false)..assignmentName(this.getClass().getSimpleName();
   }
 
   @Override
