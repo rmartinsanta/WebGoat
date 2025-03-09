@@ -1,5 +1,4 @@
 # IMPORTANT NOTICE
-H O L A
 This is an unlinked fork of the original WebGoat project (https://github.com/WebGoat/WebGoat).
 Any contributions should target the original project.
 
