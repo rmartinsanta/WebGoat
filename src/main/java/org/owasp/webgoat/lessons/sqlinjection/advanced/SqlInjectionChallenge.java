@@ -54,7 +54,7 @@ public class SqlInjectionChallenge extends AssignmentEndpoint {
   // assignment path is bounded to class so we use different http method :-)
   @ResponseBody
   public AttackResult registerNewUser(
-      @RequestParam String username_reg,
+      @RequestParam String username_reg, //1 y 2
       @RequestParam String email_reg,
       @RequestParam String password_reg)
       throws Exception {
@@ -63,25 +63,31 @@ public class SqlInjectionChallenge extends AssignmentEndpoint {
     if (attackResult == null) {
 
       try (Connection connection = dataSource.getConnection()) {
-        String checkUserQuery =
-            "select userid from sql_challenge_users where userid = '" + username_reg + "'";
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(checkUserQuery);
+       String checkUserQuery =
+            "select userid from sql_challenge_users where userid = ?"; //3,4,5
 
-        if (resultSet.next()) {
-          if (username_reg.contains("tom'")) {
-            attackResult = success(this).feedback("user.exists").build();
-          } else {
-            attackResult = failed(this).feedback("user.exists").feedbackArgs(username_reg).build();
+        //new secure query 
+        try(PreparedStatement preparedStatement1 = connection.prepareStatement(checkUserQuery)){
+          preparedStatement1.setString(1, username_reg);
+
+          //Statement statement = connection.createStatement();
+          try(ResultSet resultSet = preparedStatement1.executeQuery()){ //6
+            if (resultSet.next()) {
+              if (username_reg.contains("tom'")) {
+                attackResult = success(this).feedback("user.exists").build();
+              } else {
+                attackResult = failed(this).feedback("user.exists").feedbackArgs(username_reg).build();
+              }
+            } else {
+              try(PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO sql_challenge_users VALUES (?, ?, ?)")){
+                preparedStatement.setString(1, username_reg);
+                preparedStatement.setString(2, email_reg);
+                preparedStatement.setString(3, password_reg);
+                preparedStatement.execute();
+                attackResult = success(this).feedback("user.created").feedbackArgs(username_reg).build();
+              }
+            }
           }
-        } else {
-          PreparedStatement preparedStatement =
-              connection.prepareStatement("INSERT INTO sql_challenge_users VALUES (?, ?, ?)");
-          preparedStatement.setString(1, username_reg);
-          preparedStatement.setString(2, email_reg);
-          preparedStatement.setString(3, password_reg);
-          preparedStatement.execute();
-          attackResult = success(this).feedback("user.created").feedbackArgs(username_reg).build();
         }
       } catch (SQLException e) {
         attackResult = failed(this).output("Something went wrong").build();
