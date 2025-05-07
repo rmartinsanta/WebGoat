@@ -1,6 +1,6 @@
 # IMPORTANT NOTICE
 This is an unlinked fork of the original WebGoat project (https://github.com/WebGoat/WebGoat).
-Any contributions should target the original project.
+Any contributions should target the original project .
 
 # WebGoat 8: A deliberately insecure Web Application
 
@@ -14,7 +14,7 @@ Any contributions should target the original project.
 
 # Introduction
 
-WebGoat is a deliberately insecure web application maintained by [OWASP](http://www.owasp.org/) designed to teach web
+WebGoat is a deliberately  insecure web application maintained by [OWASP](http://www.owasp.org/) designed to teach  web
 application security lessons.
 
 This program is a demonstration of common server-side application flaws. The
