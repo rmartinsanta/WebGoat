@@ -31,7 +31,7 @@ these techniques without authorization, you are very likely to get caught. If
 you are caught engaging in unauthorized hacking, most companies will fire you.
 Claiming that you were doing security research will not work as that is the
 first thing that all hackers claim.*
-
+h
 ![WebGoat](docs/images/webgoat.png)
 
 # Installation instructions:
@@ -51,7 +51,7 @@ docker run -it -p 127.0.0.1:8080:8080 -p 127.0.0.1:9090:9090 webgoat/webgoat
 If you want to reuse the container, give it a name:
 
 ```shell
-docker run --name webgoat -it -p 127.0.0.1:8080:8080 -p 127.0.0.1:9090:9090 webgoat/webgoat
+docker run --name webgoat -it -p 127.0.0.1:8080:8080 -p 127.0.0.1:9090:9090 webgoat/webgoat  sss
 ```
 
 As long as you don't remove the container you can use:
@@ -67,7 +67,7 @@ This way, you can start where you left off. If you remove the container, you nee
 Instead of installing tools locally we have a complete Docker image based on running a desktop in your browser. This way you only have to run a Docker image which will give you the best user experience.
 
 ```shell
-docker run -p 127.0.0.1:3000:3000 webgoat/webgoat-desktop
+docker run -p 127.0.0.1:3000:3000 webgoat/webgoat-desktop  qq
 ```
 
 ## 3. Standalone
@@ -112,7 +112,7 @@ docker build -f Dockerfile . -t webgoat/webgoat
 Now we are ready to run the project. WebGoat is using Spring Boot.
 
 ```Shell
-# On Linux/Mac:
+# On Linux/Mac: n
 ./mvnw spring-boot:run
 # On Windows:
 ./mvnw.cmd spring-boot:run
