@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 // comentario random
 class AccessControlIntegrationTest extends IntegrationTest {
 // comentario random 2
+    // comentario random 3
   @Test
   void testLesson() {
     startLesson("MissingFunctionAC", true);
