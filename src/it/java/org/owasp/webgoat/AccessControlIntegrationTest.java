@@ -7,7 +7,7 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 // comentario random
 class AccessControlIntegrationTest extends IntegrationTest {
-
+// comentario random 2
   @Test
   void testLesson() {
     startLesson("MissingFunctionAC", true);
