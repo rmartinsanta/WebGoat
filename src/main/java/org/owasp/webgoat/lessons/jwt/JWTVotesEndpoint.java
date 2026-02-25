@@ -24,7 +24,6 @@ package org.owasp.webgoat.lessons.jwt;
 
 import static java.util.Comparator.comparingLong;
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toList;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
@@ -68,7 +67,9 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class JWTVotesEndpoint extends AssignmentEndpoint {
 
-  public static final String JWT_PASSWORD = TextCodec.BASE64.encode("victory");
+  public static final String JWT_PASSWORD = TextCodec.BASE64.encode(System.getenv("JWT_PASSWORD"));
+
+
   private static String validUsers = "TomJerrySylvester";
 
   private static int totalVotes = 38929;
@@ -147,7 +148,8 @@ public class JWTVotesEndpoint extends AssignmentEndpoint {
         new MappingJacksonValue(
             votes.values().stream()
                 .sorted(comparingLong(Vote::getAverage).reversed())
-                .collect(toList()));
+                .toList());
+                
     if (StringUtils.isEmpty(accessToken)) {
       value.setSerializationView(Views.GuestView.class);
     } else {
