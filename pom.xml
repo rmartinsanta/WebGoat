@@ -109,6 +109,7 @@
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
     <bootstrap.version>3.3.7</bootstrap.version>
     <cglib.version>2.2</cglib.version>
+    <sonar.organization>oscarrp15</sonar.organization>
     <!-- do not update necessary for lesson -->
     <checkstyle.version>3.1.2</checkstyle.version>
     <commons-collections.version>3.2.1</commons-collections.version>
@@ -153,6 +154,7 @@
         <artifactId>asm</artifactId>
         <version>9.1</version>
       </dependency>
+        
 
       <dependency>
         <groupId>org.apache.commons</groupId>
