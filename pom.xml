@@ -3,6 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+    
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -143,6 +144,9 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
+    <sonar.organization>aaa-urjc</sonar.organization>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
   </properties>
 
   <dependencyManagement>
