@@ -105,6 +105,11 @@
   </issueManagement>
 
   <properties>
+    <sonar.organization>0xm4gn0</sonar.organization>
+    <sonar.projectKey>0xM4gn0_WebGoat</sonar.projectKey>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>  
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <sonar.skip>true</sonar.skip>
     <!-- Shared properties with plugins and version numbers across submodules-->
     <asciidoctorj.version>2.5.3</asciidoctorj.version>
     <bootstrap.version>3.3.7</bootstrap.version>
