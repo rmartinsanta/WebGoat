@@ -45,6 +45,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; //nueva línea
 
 @WebMvcTest(MailboxController.class)
 public class MailboxControllerTest {
@@ -52,6 +53,7 @@ public class MailboxControllerTest {
   @Autowired private MockMvc mvc;
   @MockBean private MailboxRepository mailbox;
   @MockBean private UserService userService;
+  @MockBean private BCryptPasswordEncoder passwordEncoder; //nueva línea
   @Autowired private ObjectMapper objectMapper;
 
   @JsonIgnoreProperties("time")

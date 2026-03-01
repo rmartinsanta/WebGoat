@@ -35,12 +35,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; //nueva línea
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
   @Mock private UserRepository mockUserRepository;
-
+  @Mock private BCryptPasswordEncoder passwordEncoder;  //nueva línea
   @InjectMocks private UserService sut;
 
   @Test
@@ -69,9 +70,8 @@ public class UserServiceTest {
   public void testAddUser() {
     var username = "guest";
     var password = "guest";
-
+    when(passwordEncoder.encode(password)).thenReturn("hashedPassword"); //nueva línea
     sut.addUser(username, password);
-
     verify(mockUserRepository, times(1)).save(any(WebGoatUser.class));
   }
 }

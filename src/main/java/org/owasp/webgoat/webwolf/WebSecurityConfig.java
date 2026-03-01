@@ -34,7 +34,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+//Eliminado la librería NoOpPasswordEncoder.
+//Añadir la nueva librería.
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /** Security configuration for WebGoat. */
 @Configuration
@@ -43,7 +45,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final UserService userDetailsService;
-
+  
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry security =
@@ -64,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService); // .passwordEncoder(bCryptPasswordEncoder());
+    auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //utilizo la función implementada para que las contraseñas sean seguras.
   }
 
   @Bean
@@ -79,8 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return super.authenticationManager();
   }
 
+  //No sirve la función public NoOpPasswordEncoder passwordEncoder(), la cmambio por la siguiente función:
   @Bean
-  public NoOpPasswordEncoder passwordEncoder() {
-    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+  public BCryptPasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
   }
 }
