@@ -22,6 +22,8 @@
 
 package org.owasp.webgoat.lessons.challenges;
 
+import java.util.UUID;
+
 /**
  * Interface with constants so we can easily change the flags
  *
@@ -30,6 +32,7 @@ package org.owasp.webgoat.lessons.challenges;
  */
 public interface SolutionConstants {
 
-  // TODO should be random generated when starting the server
-  String PASSWORD = "!!webgoat_admin_1234!!";
+  // MITIGACIÓN CWE-798: Contraseña generada dinámicamente al iniciar la aplicación.
+  // Ya no está hardcodeada en el código fuente.
+  String PASSWORD = UUID.randomUUID().toString();
 }
