@@ -22,14 +22,15 @@
 
 package org.owasp.webgoat.lessons.challenges;
 
-/**
- * Interface with constants so we can easily change the flags
- *
- * @author nbaars
- * @since 3/23/17.
- */
-public interface SolutionConstants {
+import java.security.SecureRandom;
+import java.math.BigInteger;
 
-  // TODO should be random generated when starting the server
-  String PASSWORD = "!!webgoat_admin_1234!!";
+public class SolutionConstants {
+
+     public static final String PASSWORD = generateSecurePassword();
+
+  private static String generateSecurePassword() {
+      SecureRandom random = new SecureRandom();
+      return new BigInteger(130, random).toString(32);
+  }
 }
