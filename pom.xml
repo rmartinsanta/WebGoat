@@ -13,6 +13,9 @@
   <version>2023.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+
+
+    
   <name>WebGoat</name>
   <description>WebGoat, a deliberately insecure Web Application</description>
   <url>https://github.com/WebGoat/WebGoat</url>
@@ -111,6 +114,7 @@
     <cglib.version>2.2</cglib.version>
     <!-- do not update necessary for lesson -->
     <checkstyle.version>3.1.2</checkstyle.version>
+    <sonar.organization>praton2023</sonar.organization>
     <commons-collections.version>3.2.1</commons-collections.version>
     <commons-io.version>2.11.0</commons-io.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -143,6 +147,10 @@
     <xstream.version>1.4.5</xstream.version>
     <!-- do not update necessary for lesson -->
     <zxcvbn.version>1.5.2</zxcvbn.version>
+    <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+    <skipTests>true</skipTests>
+
+
   </properties>
 
   <dependencyManagement>

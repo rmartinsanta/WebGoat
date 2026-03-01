@@ -22,6 +22,8 @@
 
 package org.owasp.webgoat.webwolf.mailbox;
 
+import javax.validation.Valid;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,11 +59,21 @@ public class MailboxController {
     return modelAndView;
   }
 
-  @PostMapping("/mail")
-  @ResponseStatus(HttpStatus.CREATED)
-  public void sendEmail(@RequestBody Email email) {
-    mailboxRepository.save(email);
-  }
+ @PostMapping("/mail")
+ @ResponseStatus(HttpStatus.CREATED)
+ public void sendEmail(@Valid @RequestBody EmailDTO req) { //test 
+  UserDetails user = (UserDetails) SecurityContextHolder.getContext()
+      .getAuthentication().getPrincipal();
+
+  Email email = new Email();
+  email.setContents(req.contents());
+  email.setTitle(req.title());
+  email.setRecipient(req.recipient());
+  email.setSender(user.getUsername());
+
+  mailboxRepository.save(email);
+}
+
 
   @DeleteMapping("/mail")
   @ResponseStatus(HttpStatus.ACCEPTED)
