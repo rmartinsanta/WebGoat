@@ -57,10 +57,25 @@ public class MailboxController {
     return modelAndView;
   }
 
+  /*
   @PostMapping("/mail")
   @ResponseStatus(HttpStatus.CREATED)
   public void sendEmail(@RequestBody Email email) {
     mailboxRepository.save(email);
+  }
+  */
+  
+  @PostMapping("/mail")
+  @ResponseStatus(HttpStatus.CREATED)
+  public void sendEmail(@RequestBody EmailRequest req) {
+
+      Email email = new Email();
+
+      email.setRecipient(req.getRecipient());
+      email.setTitle(req.getSubject());      
+      email.setContents(req.getMessage());
+
+      mailboxRepository.save(email);
   }
 
   @DeleteMapping("/mail")
