@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -21,13 +22,14 @@ class UserServiceTest {
   @Mock private UserTrackerRepository userTrackerRepository;
   @Mock private JdbcTemplate jdbcTemplate;
   @Mock private Function<String, Flyway> flywayLessons;
+  @Mock private PasswordEncoder passwordEncoder;
 
   @Test
   void shouldThrowExceptionWhenUserIsNotFound() {
     when(userRepository.findByUsername(any())).thenReturn(null);
     UserService userService =
         new UserService(
-            userRepository, userTrackerRepository, jdbcTemplate, flywayLessons, List.of());
+            userRepository, userTrackerRepository, jdbcTemplate, flywayLessons, List.of(), passwordEncoder);
     Assertions.assertThatThrownBy(() -> userService.loadUserByUsername("unknown"))
         .isInstanceOf(UsernameNotFoundException.class);
   }

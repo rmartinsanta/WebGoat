@@ -22,14 +22,25 @@
 
 package org.owasp.webgoat.lessons.challenges;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
- * Interface with constants so we can easily change the flags
+ * Component that provides solution constants from configuration.
+ * Password should be stored in environment variables or configuration properties,
+ * not hard-coded in source code.
  *
  * @author nbaars
  * @since 3/23/17.
  */
-public interface SolutionConstants {
+@Component
+@Getter
+@Setter
+public class SolutionConstants {
 
   // TODO should be random generated when starting the server
-  String PASSWORD = "!!webgoat_admin_1234!!";
+  @Value("${webgoat.challenge.password:!!webgoat_admin_1234!!}")
+  private String password;
 }

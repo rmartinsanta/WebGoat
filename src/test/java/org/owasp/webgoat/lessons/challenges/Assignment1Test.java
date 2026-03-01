@@ -42,11 +42,14 @@ class Assignment1Test extends AssignmentEndpointTest {
 
   private MockMvc mockMvc;
   private Flags flags;
+  private SolutionConstants solutionConstants;
 
   @BeforeEach
   void setup() {
     flags = new Flags();
-    Assignment1 assignment1 = new Assignment1(flags);
+    solutionConstants = new SolutionConstants();
+    solutionConstants.setPassword("!!webgoat_admin_1234!!");
+    Assignment1 assignment1 = new Assignment1(flags, solutionConstants);
     init(assignment1);
     this.mockMvc = standaloneSetup(assignment1).build();
   }
@@ -62,8 +65,10 @@ class Assignment1Test extends AssignmentEndpointTest {
                 .param("username", "admin")
                 .param(
                     "password",
-                    SolutionConstants.PASSWORD.replace(
-                        "1234", String.format("%04d", ImageServlet.PINCODE))))
+                    solutionConstants
+                        .getPassword()
+                        .replace(
+                            "1234", String.format("%04d", ImageServlet.PINCODE))))
         .andExpect(jsonPath("$.feedback", CoreMatchers.containsString("flag: " + flags.getFlag(1))))
         .andExpect(jsonPath("$.lessonCompleted", CoreMatchers.is(true)));
   }
